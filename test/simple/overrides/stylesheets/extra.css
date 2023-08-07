@@ -1,0 +1,8 @@
+.md-content a {
+    text-decoration: underline;
+}
+
+img.slide {
+    border-style:dashed;
+    border-width: medium;
+}

@@ -1,0 +1,21 @@
+site_name: Pdf2Image Plugin Test
+site_description: Test for Pdf2Image Plugin
+docs_dir: docs
+theme:
+  name: readthedocs
+  custom_dir: "overrides/"
+
+markdown_extensions:
+  extra: {}
+  attr_list: {}
+  md_in_html: {}
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search
+  - pdf2image:
+      src: ["*.pdf"]
+      fmt: png
+      size: !!python/tuple [600, NULL]
