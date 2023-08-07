@@ -13,9 +13,9 @@
 
 import logging
 import os
+from pathlib import Path
 
 import pdf2image
-from pathlib import Path
 from mkdocs.config import config_options as c
 from mkdocs.config.base import Config as BaseConfig
 from mkdocs.plugins import BasePlugin
@@ -26,13 +26,15 @@ TAG = "[Pdf2Image] -"
 
 class Pdf2ImagePluginConfig(BaseConfig):
     """Configuration options for the Pdf2Image"""
+
     src = c.Type(list, default=[])
     dpi = c.Type(int, default=200)
     fmt = c.Choice(["png", "jpg"], default="jpg")
     size = c.Type(tuple, default=(None, None))
     extension = c.Optional(c.Type(str))
     force = c.Type(bool, default=False)
-   
+
+
 # pylint: disable-next=too-few-public-methods
 class Pdf2ImagePlugin(BasePlugin[Pdf2ImagePluginConfig]):
     """Pdf2Image Plugin for MkDocs"""
@@ -47,7 +49,11 @@ class Pdf2ImagePlugin(BasePlugin[Pdf2ImagePluginConfig]):
             for src in Path(config.docs_dir).glob(pattern):
                 extension = self.config.extension or self.config.fmt
                 dst = src.with_suffix("." + extension)
-                if not self.config.force and dst.exists() and src.stat().st_mtime <= dst.stat().st_mtime:
+                if (
+                    not self.config.force
+                    and dst.exists()
+                    and src.stat().st_mtime <= dst.stat().st_mtime
+                ):
                     logger.debug("%s %s already exists", TAG, dst)
                     continue
 
@@ -59,7 +65,6 @@ class Pdf2ImagePlugin(BasePlugin[Pdf2ImagePluginConfig]):
                     size=self.config.size,
                     fmt=self.config.fmt,
                     single_file=True,
-                    paths_only=True)
+                    paths_only=True,
+                )
                 os.rename(res[0], dst)
-
-
