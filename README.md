@@ -1,6 +1,6 @@
 # mkdocs-pdf2image-plugin
 
-This plugin generates an image from PDF files. It is particularly useful when you want
+This plugin generates images from the first page of PDF files. It is particularly useful when you want
 to include PDF presentations in your documentation.
 
 ## Installation
