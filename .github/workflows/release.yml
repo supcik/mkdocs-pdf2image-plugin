@@ -38,6 +38,8 @@ jobs:
           poetry build
       - name: Build test site
         run: |
+          sudo apt-get update
+          sudo apt install poppler-utils
           poetry install -E test
           cd test/simple && poetry run mkdocs build
       - name: Publish package distributions to PyPI
