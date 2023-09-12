@@ -2,5 +2,6 @@
 /dist
 __pycache__
 
+test/*/site
 test/simple/docs/test.png
 test/simple/docs/test.jpg
